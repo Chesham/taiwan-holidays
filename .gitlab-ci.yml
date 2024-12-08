@@ -1,0 +1,20 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - test
+  - build
+
+test:
+  stage: test
+  script:
+    - docker build --target test .
+
+build:
+  stage: build
+  variables:
+    FQIN: $FQIP:$CI_COMMIT_REF_NAME
+  script:
+    - docker build --target build -t $FQIN .
