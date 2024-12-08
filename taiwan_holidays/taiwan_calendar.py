@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
 from glob import glob
+from typing import Union
 
 import dateutil.parser
 import dateutil.tz
@@ -12,7 +13,9 @@ class TaiwanCalendar:
         self.timezone = dateutil.tz.gettz('Asia/Taipei')
         self.load()
 
-    def is_holiday(self, date: datetime):
+    def is_holiday(self, date: Union[datetime, str]) -> bool:
+        if isinstance(date, str):
+            date = dateutil.parser.parse(date)
         s = self.lookup.loc[self.lookup['西元日期'] == f'{date:%Y-%m-%d}']
         if s.empty:
             raise ValueError(f'No data for {date:%Y-%m-%d}')

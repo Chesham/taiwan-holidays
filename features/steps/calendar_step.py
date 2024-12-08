@@ -7,6 +7,11 @@ from features.steps.fixture import tag
 from taiwan_holidays.taiwan_calendar import TaiwanCalendar
 
 
+@given('today is "{date_str}"')
+def step_impl(ctx: Context, date_str):
+    ctx.today = date_str
+
+
 @given('today is {date_str}')
 def step_impl(ctx: Context, date_str):
     ctx.today = dateutil.parser.parse(date_str).replace(tzinfo=ctx.timezone)
