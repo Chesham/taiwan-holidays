@@ -14,7 +14,8 @@ FROM python:3.11-slim AS build
 
 WORKDIR /app
 
-RUN pip install build twine
+RUN pip install setuptools build twine poetry
 COPY taiwan_holidays taiwan_holidays
 COPY pyproject.toml pyproject.toml
-RUN python -m build
+COPY README.md README.md
+RUN python -m poetry build
