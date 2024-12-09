@@ -14,7 +14,7 @@ FROM python:3.11-slim AS build
 
 WORKDIR /app
 
-RUN pip install build
+RUN pip install build twine
 COPY taiwan_holidays taiwan_holidays
 COPY pyproject.toml pyproject.toml
 RUN python -m build

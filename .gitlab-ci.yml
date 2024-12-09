@@ -6,15 +6,32 @@ services:
 stages:
   - test
   - build
+  - publish
+  
+before_script:
+  - export FQIN=$FQIP:$(git describe --always --tags)
 
 test:
   stage: test
+  only:
+    - tags
   script:
     - docker build --target test .
 
 build:
   stage: build
-  before_script:
-    - export FQIN=$FQIP:$(git describe --always --tags)
+  only:
+    - tags
   script:
     - docker build --target build -t $FQIN .
+
+publish:
+  stage: publish
+  only:
+    - tags
+  script:
+    - |
+      docker run --rm --name pypi-publisher \
+      -e TWINE_USERNAME='__token__' \
+      -e TWINE_PASSWORD=$PYPI_API_TOKEN \
+      "$FQIN" twine upload --verbose --repository pypi dist/*
