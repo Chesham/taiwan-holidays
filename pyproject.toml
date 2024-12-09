@@ -1,17 +1,15 @@
-[build-system]
-requires = ["setuptools>=42", "wheel"]
-build-backend = "setuptools.build_meta"
-
-[project]
+[tool.poetry]
 name = "taiwan-holidays"
-version = "0.1.0"
+version = "0.2.0"
 description = "A Python package for determining whether a given date is a workday or a holiday in Taiwan, based on the official administrative calendar."
-readme = "README.md"  # 指向你的說明文件
-license = { file = "LICENSE" }  # 授權文件
-authors = [
-    { name = "Chesham Chou", email = "c.moweb@gmail.com" }
-]
-keywords = ["taiwan", "holidays", "workdays", "calendar"]
+authors = ["Chesham Chou <c.moweb@gmail.com>"]
+license = "MIT"
+
+readme = "README.md"
+homepage = "https://github.com/Chesham/taiwan-holidays"
+repository = "https://github.com/Chesham/taiwan-holidays"
+documentation = "https://github.com/Chesham/taiwan-holidays"
+
 classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
@@ -23,22 +21,18 @@ classifiers = [
     "Topic :: Software Development :: Libraries",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-dependencies = [
-    "pandas",
-    "python-dateutil",
-]
 
-[project.optional-dependencies]
-dev = [
-    "black",
-]
+packages = [{ include = "taiwan_holidays/**/*" }]
 
-[project.urls]
-homepage = "https://github.com/Chesham/taiwan-holidays"
-repository = "https://github.com/Chesham/taiwan-holidays"
+[tool.poetry.dependencies]
+numpy = "^1.19"
+python = "^3.9"
+pandas = "^1.1"
+python-dateutil = "^2.8"
 
-[tool.setuptools]
-packages = ["taiwan_holidays"]
+[tool.poetry.dev-dependencies]
+black = "^20.8b1"
 
-[tool.setuptools.package-data]
-"taiwan_holidays" = ["data/*"]
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
