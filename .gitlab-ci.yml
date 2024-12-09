@@ -14,7 +14,7 @@ test:
 
 build:
   stage: build
-  variables:
-    FQIN: $FQIP:$CI_COMMIT_REF_NAME
+  before_script:
+    - export FQIN=$FQIP:$(git describe --always --tags)
   script:
     - docker build --target build -t $FQIN .
