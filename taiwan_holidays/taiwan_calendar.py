@@ -6,6 +6,7 @@ from typing import Union
 import dateutil.parser
 import dateutil.tz
 import pandas as pd
+from dateutil.relativedelta import relativedelta
 
 
 class TaiwanCalendar:
@@ -34,3 +35,30 @@ class TaiwanCalendar:
             df['西元日期'] = df['西元日期'].dt.tz_localize(self.timezone)
             lookup.append(df)
         self.lookup = pd.concat(lookup)
+
+    def iter_workdays(self, start: Union[datetime, str], end: Union[datetime, str]):
+        start = self.parse_date(start)
+        end = self.parse_date(end)
+        cur = start
+        for cur in self.iter_dates(start, end):
+            if self.is_holiday(cur):
+                continue
+            yield cur
+
+    def iter_dates(self, start: Union[datetime, str], end: Union[datetime, str]):
+        start = self.parse_date(start)
+        end = self.parse_date(end)
+        cur = start
+        step = relativedelta(days=1)
+        cond = lambda x: x <= end
+        if start > end:
+            step = -step
+            cond = lambda x: x >= end
+        while cond(cur):
+            yield cur
+            cur += step
+
+    def parse_date(self, date: Union[datetime, str]) -> datetime:
+        if isinstance(date, str):
+            date = dateutil.parser.parse(date)
+        return date.replace(tzinfo=self.timezone)

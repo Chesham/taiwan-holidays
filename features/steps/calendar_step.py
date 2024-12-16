@@ -43,3 +43,22 @@ def step_impl(ctx: Context):
 @tag('taiwan-calendar')
 def taiwan_calendar(ctx: Context, scn):
     ctx.calendar = TaiwanCalendar()
+
+
+@when(u'I iterate workdays from {start} to {end}')
+def step_impl(ctx: Context, start, end):
+    it = ctx.calendar.iter_workdays(start, end)
+    ctx.workdays = list(it)
+
+
+@then(u'I should get {days:d} workdays')
+def step_impl(ctx: Context, days):
+    workdays = ctx.workdays
+    workdays | should.have.length(days)
+
+
+@then(u'The date {date} should in the workdays')
+def step_impl(ctx: Context, date):
+    date = dateutil.parser.parse(date).replace(tzinfo=ctx.timezone)
+    workdays = ctx.workdays
+    workdays | should.contains(date)
