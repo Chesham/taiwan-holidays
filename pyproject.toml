@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "taiwan-holidays"
-version = "0.2.0"
+version = "0.3.0"
 description = "A Python package for determining whether a given date is a workday or a holiday in Taiwan, based on the official administrative calendar."
 authors = ["Chesham Chou <c.moweb@gmail.com>"]
 license = "MIT"
