@@ -1,6 +1,6 @@
 [project]
 name = "taiwan-holidays"
-version = "0.2026.0"
+version = "0.2026.1"
 description = "A Python package for determining whether a given date is a workday or a holiday in Taiwan, based on the official administrative calendar."
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -12,6 +12,8 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Intended Audience :: Developers",
