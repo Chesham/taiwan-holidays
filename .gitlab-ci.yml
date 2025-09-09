@@ -9,10 +9,10 @@ build:
   environment: dev
   stage: build
   script:
-    - docker build --target build -t $FQIN .
+    - docker build --target publish -t $FQIN .
 
 publish:
   environment: dev
   stage: publish
   script:
-    - docker run "$FQIN"
+    - docker run -e UV_PUBLISH_URL -e UV_PUBLISH_TOKEN "$FQIN"
