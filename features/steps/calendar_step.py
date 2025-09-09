@@ -30,11 +30,6 @@ def step_impl(ctx: Context):
     ctx.result | should.be.true
 
 
-@then('I should be told that today is not a holiday')
-def step_impl(ctx: Context):
-    ctx.result | should.be.false
-
-
 @then('I should get a value error')
 def step_impl(ctx: Context):
     ctx.result | should.be.type.of(ValueError)

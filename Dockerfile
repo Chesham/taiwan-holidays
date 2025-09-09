@@ -1,21 +1,28 @@
-FROM python:3.9-slim AS test
+ARG IMAGE_BASE=ghcr.io/astral-sh/uv:python3.13-trixie-slim
+
+
+# ----- 🧱 Base -----
+FROM ${IMAGE_BASE} AS base
 
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
-COPY features features
-COPY taiwan_holidays taiwan_holidays
-RUN coverage run --source=taiwan_holidays -m behave
-RUN coverage=$(coverage report --format=total) && \
-    [ "$coverage" = "100" ] || { echo "Coverage is $coverage%"; exit 1; }
 
-FROM python:3.11-slim AS build
+# ----- 📦 Build -----
+FROM base AS build
 
-WORKDIR /app
+COPY .python-version LICENSE pyproject.toml README.md tox.ini ./
+COPY features features/
+COPY src src/
+RUN uv sync && \
+    uv run tox && \
+    uv run coverage run --source=src/taiwan_holidays -m behave && \
+    coverage=$(uv run coverage report --format=total) && \
+    [ "$coverage" = "100" ] || { echo "Coverage is $coverage%"; exit 1; } && \
+    uv build
 
-RUN pip install setuptools build twine poetry
-COPY taiwan_holidays taiwan_holidays
-COPY pyproject.toml pyproject.toml
-COPY README.md README.md
-RUN python -m poetry build
+
+# ----- 🚀 Publish -----
+FROM base AS publish
+
+COPY --from=build /app/dist dist/
+CMD [ "uv", "publish", "dist/*" ]

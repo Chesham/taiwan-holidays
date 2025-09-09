@@ -4,13 +4,18 @@
 
 ![coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
 ![license](https://img.shields.io/badge/license-MIT-green)
+![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)
+![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)
+![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)
+![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)
+![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)
 
 ## Features
 
 - Determine if a date is a workday or holiday.
 - Support for official Taiwan government work calendar rules, including special adjusted workdays and holidays.
 - Easy-to-use API for date checking.
-- Currently, only the official Taiwanese government calendar of public working days starting from the year 2019 (Republic of China year 108) onwards is supported.
+- Currently, only the official Taiwanese government calendar of public working days starting from the year 2019 (Republic of China year 108) **onwards** is supported.
 
 ## Installation
 
