@@ -4,6 +4,12 @@
 
 ![coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
 ![license](https://img.shields.io/badge/license-MIT-green)
+![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)
+![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)
+![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)
+![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)
+![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)
+[![PyPI Downloads](https://static.pepy.tech/personalized-badge/taiwan-holidays?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=GREEN&left_text=downloads)](https://pepy.tech/projects/taiwan-holidays)
 
 ## Features
 
