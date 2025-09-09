@@ -594,7 +594,7 @@ wheels = [
 
 [[package]]
 name = "taiwan-holidays"
-version = "0.4.0"
+version = "0.2026.0rc1"
 source = { editable = "." }
 dependencies = [
     { name = "pandas" },
